@@ -1,0 +1,66 @@
+ 
+-- 1. How many actors are there with the last name ‘Wahlberg’?
+SELECT last_name
+from actor
+where last_name like 'Wahlberg';
+-- There are 2 actors with the last name Wahlberg
+
+-- 2. How many payments were made between $3.99 and $5.99?
+select count(amount)
+from payment
+where amount between 3.99 and 5.99;
+-- There are 5,607 payments that were between $3.99 ans $5.99
+
+-- 3. What film does the store have the most of? (search in inventory)
+SELECT  film_id, store_id
+from inventory
+group by  film_id , store_id  
+order by count(film_id) asc ;
+
+
+
+-- 4. How many customers have the last name ‘William’?
+SELECT last_name
+from customer
+where last_name like 'William';
+-- There are no customers that have the last name William
+
+-- 5. What store employee (get the id) sold the most rentals?
+SELECT sum(staff_id)
+from payment
+group by staff_id;
+-- Store employee Jon Stephens(staff_id = 2) sold the most rentals with a total of 14,608 
+
+
+-- 6.  How many different district names are there?
+select count(distinct district)
+from address;
+--  There are 378 distinct district names
+
+-- 7. What film has the most actors in it? (use film_actor table and get film_id)
+select actor_id
+from film_actor
+group by actor_id;
+-- order by actor_id desc ;
+
+
+
+-- 8. From store_id 1, how many customers have a last name ending with ‘es’? (use customer table)
+select count(last_name)
+from customer
+where last_name like '%es';
+--  There are 21 customers that have a last name ending with 'es'
+
+-- 9. How many payment amounts (4.99, 5.99, etc.) had a number of rentals above 250 for customers with ids between 380 and 430? (use group by and having > 250)
+select  *
+from payment
+-- where customer_id between 380 and 430
+-- having sum(amount)> 250;
+
+
+-- 10. Within the film table, how many rating categories are there? And what rating has the most movies total?
+select rating, count( rating)
+from film
+group by rating
+order by rating;
+-- There are 5 rating categories, PG-13 having the most movies with a total of 223
